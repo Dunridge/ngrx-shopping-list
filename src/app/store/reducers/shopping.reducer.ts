@@ -16,10 +16,12 @@ export function ShoppingReducer(state: ShoppingItem[] = initialState, action: Sh
   switch (action.type) {
 
     case ShoppingActionTypes.ADD_ITEM: {
+      console.log(action, action.payload);
       return [...state, action.payload];
     }
 
     case ShoppingActionTypes.DELETE_ITEM: {
+      console.log(action, action.payload);
       return state.filter(item => item.id !== action.payload);
     }
 
