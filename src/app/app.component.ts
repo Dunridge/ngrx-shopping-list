@@ -3,6 +3,8 @@ import {AppState} from './store/models/app-state.model';
 import {Store} from '@ngrx/store';
 import {Observable} from 'rxjs';
 import {ShoppingItem} from './store/models/shopping-item.model';
+import {AddItemAction} from './store/actions/shopping.actions';
+import {v4 as uuid} from 'uuid';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +13,7 @@ import {ShoppingItem} from './store/models/shopping-item.model';
 })
 export class AppComponent implements OnInit {
   shoppingItems$: Observable<ShoppingItem[]>;
-  title = 'ngrx-shopping-list';
+  newShoppingItem: ShoppingItem = {id: '', name: ''};
 
   constructor(private store: Store<AppState>) {
   }
@@ -19,4 +21,12 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.shoppingItems$ = this.store.select(store => store.shopping); // in future this will be replaced with a selector
   }
+
+  addItem(): void {
+    this.newShoppingItem.id = uuid();
+    this.store.dispatch(new AddItemAction(this.newShoppingItem));
+    this.newShoppingItem = {id: '', name: ''};
+  }
+
+  // TODO: implement a delete action on your own
 }
