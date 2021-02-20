@@ -19,6 +19,10 @@ export function ShoppingReducer(state: ShoppingItem[] = initialState, action: Sh
       return [...state, action.payload];
     }
 
+    case ShoppingActionTypes.DELETE_ITEM: {
+      return state.filter(item => item.id !== action.payload);
+    }
+
     default: {
       return state;
     }
