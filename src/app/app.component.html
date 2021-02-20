@@ -1,7 +1,19 @@
-<div>
-  <ul>
-    <li *ngFor="let shopping of shoppingItems$ | async">
-      {{ shopping.name }}
-    </li>
-  </ul>
+<div id="wrapper">
+  <div id="shopping-list">
+    <div id="list">
+      <h2>Shopping List</h2>
+
+      <ul>
+        <li *ngFor="let shopping of shoppingItems$ | async" (click)="deleteItem(shopping.id)">
+          {{ shopping.name }}
+          <br><br>
+        </li>
+      </ul>
+    </div>
+
+    <form (ngSubmit)="addItem()">
+      <input type="text" [(ngModel)]="newShoppingItem.name" placeholder="Item" name="itemName"/>
+      <button type="submit" >+</button>
+    </form>
+  </div>
 </div>
