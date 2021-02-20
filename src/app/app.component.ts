@@ -20,10 +20,6 @@ export class AppComponent implements OnInit {
   constructor(private store: Store<AppState>) {
   }
 
-  ngOnInit(): void {
-    this.shoppingItems$ = this.store.select(store => store.shopping); // in future this will be replaced with a selector
-  }
-
   addItem(): void {
     this.newShoppingItem.id = uuid();
     this.store.dispatch(new AddItemAction(this.newShoppingItem));
@@ -34,5 +30,7 @@ export class AppComponent implements OnInit {
     this.store.dispatch(new DeleteItemAction(id));
   }
 
-  // TODO: implement a delete action on your own
+  ngOnInit(): void {
+    this.shoppingItems$ = this.store.select(store => store.shopping); // in future this will be replaced with a selector
+  }
 }
