@@ -1,1 +1,7 @@
-<div>App</div>
+<div>
+  <ul>
+    <li *ngFor="let shopping of shoppingItems$ | async">
+      {{ shopping.name }}
+    </li>
+  </ul>
+</div>
